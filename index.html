@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Hub - Order Food Online</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-red-500">Food Hub</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <input type="text" placeholder="Search for restaurants or dishes..." 
+                           class="w-64 px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-red-500">
+                    <a href="#" class="text-gray-600 hover:text-red-500">
+                        <i class="fas fa-map-marker-alt mr-2"></i>Select Location
+                    </a>
+                    <div id="user-menu" class="relative">
+                        <button id="user-btn" class="flex items-center text-gray-600 hover:text-red-500">
+                            <i class="fas fa-user-circle text-2xl"></i>
+                        </button>
+                        <div class="user-dropdown hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-2">
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-red-50">Sign In</a>
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-red-50">Sign Up</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-600">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-4 py-2">
+                <input type="text" placeholder="Search for restaurants or dishes..." 
+                       class="w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-red-500">
+            </div>
+            <a href="#" class="block px-4 py-2 text-gray-600 hover:bg-red-50">
+                <i class="fas fa-map-marker-alt mr-2"></i>Select Location
+            </a>
+            <a href="#" class="block px-4 py-2 text-gray-600 hover:bg-red-50">Sign In</a>
+            <a href="#" class="block px-4 py-2 text-gray-600 hover:bg-red-50">Sign Up</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section relative pt-16">
+        <div class="absolute inset-0 bg-gradient-to-r from-red-500 to-red-600"></div>
+        <div class="relative container mx-auto px-4 py-20 text-center text-white">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">Hungry? You're in the right place</h1>
+            <p class="text-xl mb-8">Order food from the best restaurants near you</p>
+            <div class="max-w-2xl mx-auto">
+                <div class="flex flex-col md:flex-row gap-4">
+                    <input type="text" placeholder="Enter your delivery location" 
+                           class="flex-grow px-6 py-4 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-red-500">
+                    <button class="bg-red-600 text-white px-8 py-4 rounded-lg hover:bg-red-700 transition-colors">
+                        Find Food
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Filters -->
+    <section class="py-8 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex space-x-4 overflow-x-auto pb-4">
+                <button class="filter-btn active">All</button>
+                <button class="filter-btn">Fast Food</button>
+                <button class="filter-btn">Pizza</button>
+                <button class="filter-btn">Indian</button>
+                <button class="filter-btn">Chinese</button>
+                <button class="filter-btn">Desserts</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Restaurant Grid -->
+    <section class="py-12">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-8">Popular Restaurants</h2>
+            <div id="restaurant-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Restaurant cards will be dynamically added here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div id="cart-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div class="absolute inset-y-0 right-0 max-w-md w-full bg-white shadow-xl">
+            <div class="p-4">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold">Your Cart</h3>
+                    <button id="close-cart" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div id="cart-items" class="space-y-4">
+                    <!-- Cart items will be dynamically added here -->
+                </div>
+                <div class="mt-8">
+                    <div class="flex justify-between mb-4">
+                        <span class="font-semibold">Total:</span>
+                        <span id="cart-total" class="font-bold text-red-500">$0.00</span>
+                    </div>
+                    <button id="checkout-btn" class="w-full py-3 bg-red-500 text-white rounded-lg font-semibold hover:bg-red-600">
+                        Proceed to Checkout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Button -->
+    <div id="cart" class="fixed right-4 bottom-4 z-40">
+        <button id="cart-btn" class="relative p-4 bg-red-500 rounded-full shadow-lg text-white hover:bg-red-600">
+            <i class="fas fa-shopping-cart"></i>
+            <span id="cart-count" class="absolute -top-1 -right-1 bg-white text-red-500 rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">0</span>
+        </button>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div class="absolute inset-0 flex items-center justify-center">
+            <div class="bg-white rounded-lg shadow-xl max-w-md w-full mx-4">
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold" id="auth-title">Sign In</h3>
+                        <button class="close-auth text-gray-500 hover:text-gray-700">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <form id="auth-form" class="space-y-4">
+                        <div class="sign-up-fields hidden">
+                            <input type="text" placeholder="Full Name" class="w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-red-500">
+                        </div>
+                        <div>
+                            <input type="email" placeholder="Email Address" class="w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-red-500">
+                        </div>
+                        <div>
+                            <input type="password" placeholder="Password" class="w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-red-500">
+                        </div>
+                        <button type="submit" class="w-full py-3 bg-red-500 text-white rounded-lg font-semibold hover:bg-red-600">
+                            Sign In
+                        </button>
+                    </form>
+                    <p class="mt-4 text-center text-gray-600">
+                        <span id="auth-switch-text">Don't have an account?</span>
+                        <a href="#" id="auth-switch-btn" class="text-red-500 hover:text-red-600 ml-1">Sign Up</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-auth.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
